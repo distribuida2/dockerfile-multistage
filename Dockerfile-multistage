@@ -1,0 +1,16 @@
+# Este Dockerfile tiene dos partes: la primera en donde se construye el artefacto y otro donde se ejecuta.
+# La ventaja? Nos independizamos del código fuente, solo nos llevamos el jar.
+# Qué le agregarías para qué este Dockerfile sea mejor?
+FROM openjdk:8 as build
+COPY . .
+WORKDIR /
+RUN ./mvnw clean package && mv ./target/rest-service-0.0.1-SNAPSHOT.jar /app.jar
+
+
+FROM openjdk:8-alpine
+WORKDIR /
+
+# copiamos solo el jar
+COPY --from=build /app.jar /
+
+CMD ["java", "-jar", "app.jar"]
