@@ -1,4 +1,4 @@
-##Dockerfile: buenas prácticas
+## Dockerfile: buenas prácticas
 
 ### Saludador, ¿de vuelta?
 
